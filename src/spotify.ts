@@ -3,7 +3,7 @@ import { useState } from 'react'
 import SpotifyWebApi from 'spotify-web-api-node' 
 import { useAsync } from './useAsync';
 import querystring from 'query-string'
-import { useAuthToken } from './useAuthToken';
+import { useAuthResponse } from './useAuthToken';
 const redirectUri = 'http://localhost:3000/auth'
 const clientId = '26622a388ed842deaafe5f8cf71a4352'
 const scopes = ['user-read-private', 'user-read-email', 'user-top-read']
@@ -47,20 +47,9 @@ export const fetchTopArtists = async () => {
 }
 
 export const useSpotify = () => {
-  const { authToken } = useAuthToken()
-  // const [ data, setData ] = useState(null)
-  const authProps = JSON.parse(authToken)
-  console.log(spotifyApi)
+  const { authResponse } = useAuthResponse()
+  const authProps = JSON.parse(authResponse)
   spotifyApi.setAccessToken(authProps.access_token)
-  // useAsync(async () => setData(await spotifyApi.getMe()))
-  
-  // console.log('spotifyApi', spotifyApi)
-  // spotifyApi.authorizationCodeGrant(authToken)
-
-  // useAsync(async () => {
-  //   const data = await spotifyApi.authorizationCodeGrant(authToken)
-  //   console.log('code grant', data)
-  // })
 
   return spotifyApi
 }

@@ -9,24 +9,24 @@ const initialState = localStorage[AUTHTOKEN_STORAGE_KEY]
 const authStore = createStore('authStore', initialState || null)
 
 // refactor out usePersistentStore?
-export const useAuthToken = () => {
-  const [authToken, setAuthTokenState] = useStore(authStore)
+export const useAuthResponse = () => {
+  const [authResponse, setAuthResponseState] = useStore(authStore)
 
   // writing to auth token local storage will NOT automatically update authToken via sync fn
   // https://stackoverflow.com/questions/5370784/localstorage-eventlistener-is-not-called
-  const setAuthToken = (t: string) => {
-    setAuthTokenState(t)
+  const setAuthResponse = (t: string) => {
+    setAuthResponseState(t)
     localStorage.setItem(AUTHTOKEN_STORAGE_KEY, t)
   }
   
-  const clearAuthToken = () => {
-    setAuthTokenState(null)
+  const clearAuthResponse = () => {
+    setAuthResponseState(null)
     localStorage.removeItem(AUTHTOKEN_STORAGE_KEY)
   }
 
   // listen to changes to local storage IN OTHER WINDOWS ONLY! and update appropriately
   const syncFromLocalStorage = (e: StorageEvent) => {
-    if (e.key == AUTHTOKEN_STORAGE_KEY) { setAuthTokenState(e.newValue) }
+    if (e.key == AUTHTOKEN_STORAGE_KEY) { setAuthResponseState(e.newValue) }
   }
 
   useEffect(() => {
@@ -35,9 +35,9 @@ export const useAuthToken = () => {
   }, [])
 
   return {
-    authToken,
-    setAuthToken,
-    clearAuthToken,
+    authResponse,
+    setAuthResponse,
+    clearAuthResponse,
   }
 }
 

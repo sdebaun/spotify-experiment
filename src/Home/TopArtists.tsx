@@ -2,8 +2,12 @@ import React from 'react';
 
 import { useAsync } from '../useAsync'
 import { authRedirect, useSpotify } from '../spotify'
-import { useAuthToken } from '../useAuthToken'
+import { useAuthResponse } from '../useAuthToken'
 
+type SpotifyImage = {
+  height: number,
+  url: string,
+}
 
 type SpotifyArtist = {
   external_urls: any
@@ -12,6 +16,7 @@ type SpotifyArtist = {
   id: string
   name: string
   popularity: number
+  images: SpotifyImage[]
 }
 
 type GetMyTopArtistsResponse = {
