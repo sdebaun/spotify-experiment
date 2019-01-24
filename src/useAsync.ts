@@ -35,7 +35,6 @@ export function useAsync<T>(fn: Function, args?: any) {
   })
 
   const effect = async (args: any) => {
-    // setState(Object.assign({}, state, {isComplete: true}))
     const result = await fn(args)
     setState(Object.assign({}, state, {
       isComplete: true,

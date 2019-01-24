@@ -13,7 +13,7 @@ export const authRedirect = () => {
   })
 
   const authURL = spotifyApi.createAuthorizeURL(scopes, state)
-  console.log(authURL)
+  console.log('redirecting to spotify auth', authURL)
   window.location = authURL
 }
 
@@ -23,8 +23,3 @@ export const fetchTopArtists = async () => {
   })
 
 }
-
-// this is ugly, relying on a localstorage key that is referenced independently in useAuthToken
-// export const clearAuth = () => {
-//   localStorage.removeItem('authToken')
-// }
