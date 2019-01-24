@@ -1,12 +1,9 @@
 import React from 'react';
 
-import { useAsync } from '../useAsync'
 import { authRedirect } from '../spotify'
 import { useAuthToken } from '../useAuthToken'
 
-const fetchStuff = async () => {
-  return 'foo'
-}
+import { TopArtists } from './TopArtists'
 
 const SignOut: React.SFC = () => {
   const { clearAuthToken } = useAuthToken()
@@ -21,8 +18,15 @@ const AuthOptions: React.SFC = () => {
   return authToken ? <SignOut/> : <SignIn/>
 }
 
-export const Home: React.SFC = () =>
-  <div>
+const SignInCTA: React.SFC = () =>
+  <div>Sign in to see your top artists.</div>
+
+export const Home: React.SFC = () => {
+  const { authToken } = useAuthToken()
+
+  return <div>
     <div>Home</div>
     <AuthOptions/>
+    { authToken ? <TopArtists/> : <SignInCTA/> }
   </div>
+}

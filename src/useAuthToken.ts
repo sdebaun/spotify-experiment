@@ -4,7 +4,9 @@ import { createStore, useStore } from 'react-hookstore'
 
 const AUTHTOKEN_STORAGE_KEY = 'authToken'
 
-const authStore = createStore('authStore', localStorage[AUTHTOKEN_STORAGE_KEY])
+const initialState = localStorage[AUTHTOKEN_STORAGE_KEY]
+// console.log('authStore initial state', initialState)
+const authStore = createStore('authStore', initialState || null)
 
 // refactor out usePersistentStore?
 export const useAuthToken = () => {

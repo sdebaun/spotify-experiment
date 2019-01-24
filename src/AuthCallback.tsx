@@ -6,8 +6,10 @@ import { useAuthToken } from './useAuthToken'
 
 export const AuthCallback: React.SFC<RouteComponentProps> = ({location}) => {
   const { setAuthToken } = useAuthToken()
-  const { code } = querystring.parse(location.search)
-  useEffect(() => setAuthToken(code as string), [])
+  // const { code } = querystring.parse(location.search)
+  const response = JSON.stringify(querystring.parse(location.hash))
+  useEffect(() => setAuthToken(response), [])
 
   return <Redirect to='/'/>
+  return <></>
 }
