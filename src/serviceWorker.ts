@@ -36,6 +36,7 @@ export function register(config?: Config) {
       // Our service worker won't work if PUBLIC_URL is on a different origin
       // from what our page is served on. This might happen if a CDN is used to
       // serve assets; see https://github.com/facebook/create-react-app/issues/2374
+      console.log('PUBLIC_URL.origin is different from window.location.origin!', publicUrl.origin, window.location.origin)
       return;
     }
 
@@ -59,6 +60,8 @@ export function register(config?: Config) {
         registerValidSW(swUrl, config);
       }
     });
+  } else {
+    console.log('no serviceWorker registered:', process.env.NODE_ENV, navigator)
   }
 }
 
