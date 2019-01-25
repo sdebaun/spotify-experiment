@@ -6,7 +6,7 @@ import media from './media'
 
 export const Layout = styled.div`
   display: grid;
-  width: 100vw;
+  // width: 100vw;
   // height: 100vh;
   height: auto;
   min-height: 100vh;

@@ -10,6 +10,7 @@ import {
 } from '../spotify'
 
 import { Artist } from './Artist'
+import { CardLayout } from './TopArtists'
 
 export const LikeArtistHeader: React.SFC<{artist_id: string}> = ({artist_id}) => {
   const { state } = useGetArtist(artist_id)
@@ -24,7 +25,9 @@ export const LikeArtist: React.SFC<RouteComponentProps<{artist_id: string}>> = (
   return <div>
     <LikeArtistHeader {...{artist_id}}/>
     <AsyncSwitcher<GetArtistRelatedArtistsResponse> {...state}>
-      {result => result.body.artists.map(artist => <Artist {...{key: artist.id, artist}}/>)}
+      {result => 
+        <CardLayout>{result.body.artists.map(artist => <Artist {...{key: artist.id, artist}}/>)}</CardLayout>
+      }
     </AsyncSwitcher>
   </div>
 }

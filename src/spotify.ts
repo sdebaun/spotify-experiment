@@ -5,7 +5,7 @@ import querystring from 'query-string'
 import { useAuthResponse } from './useAuthToken';
 
 const redirectUri = `${window.location.protocol}//${window.location.host}/auth`
-console.log(redirectUri)
+// console.log(redirectUri)
 const clientId = '26622a388ed842deaafe5f8cf71a4352'
 const scopes = ['user-read-private', 'user-read-email', 'user-top-read']
 const state = 'none'
@@ -77,7 +77,7 @@ export type GetMyTopArtistsResponse = {
 
 export const useGetMyTopArtists = () => {
   const api = useSpotify()
-  console.log(api.getMyTopArtists)
+  // console.log(api.getMyTopArtists)
   return useAsync<GetMyTopArtistsResponse>(api.getMyTopArtists.bind(api))
 }
 
@@ -112,6 +112,6 @@ export type GetMeResponse = {
 
 export const useGetMe = () => {
   const api = useSpotify()
-  console.log(api.getMe)
+  // console.log(api.getMe)
   return useAsync<GetMeResponse>(api.getMe.bind(api))
 }
