@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
 import styled from 'styled-components'
 
-import { authRedirect } from './spotify'
+import { authRedirect, useGetMe } from './spotify'
 import { useAuthResponse } from './useAuthToken'
 
 const SignOut: React.SFC = () => {
   const { clearAuthResponse } = useAuthResponse()
+  const { state } = useGetMe()
+  // console.log(state)
   return <>
-    <div>username@email.com</div>
+    <div>{state.result && state.result.body.display_name}</div>
     <Button inverted basic compact size='small' onClick={() => { clearAuthResponse(); window.location.href = '/' }}>sign out</Button>
   </>
 }

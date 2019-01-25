@@ -21,14 +21,19 @@ export function useAsync<T>(fn: Function, ...args: any) {
   })
 
   const effect = async (args: any) => {
-    const result = await fn(args)
+    const result = await fn(...args)
     setState(Object.assign({}, state, {
       isComplete: true,
       result,
     }))
   }
 
-  useEffect(() => { effect(args) }, args)
+  useEffect(() => { try {
+      effect(args)
+    } catch (err) {
+      console.log(err)
+    }
+  }, args)
 
   return {state, setState}
 }

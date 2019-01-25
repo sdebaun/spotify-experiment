@@ -77,6 +77,7 @@ export type GetMyTopArtistsResponse = {
 
 export const useGetMyTopArtists = () => {
   const api = useSpotify()
+  console.log(api.getMyTopArtists)
   return useAsync<GetMyTopArtistsResponse>(api.getMyTopArtists.bind(api))
 }
 
@@ -98,4 +99,19 @@ export type GetArtistResponse = {
 export const useGetArtist = (artist_id: string) => {
   const api = useSpotify()
   return useAsync<GetArtistResponse>(api.getArtist.bind(api), artist_id)
+}
+
+export type SpotifyUser = {
+  country: string
+  display_name: string
+}
+
+export type GetMeResponse = {
+  body: SpotifyUser
+}
+
+export const useGetMe = () => {
+  const api = useSpotify()
+  console.log(api.getMe)
+  return useAsync<GetMeResponse>(api.getMe.bind(api))
 }
