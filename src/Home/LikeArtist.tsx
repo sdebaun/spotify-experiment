@@ -11,11 +11,31 @@ import {
 
 import { Artist } from './Artist'
 import { CardLayout } from './TopArtists'
+import { GenreLabels } from './GenreLabels'
+
+import styled from 'styled-components'
+
+// import { Label } from 'semantic-ui-react'
+
+const StyledHeader = styled.div`
+  padding-bottom: 0.5em;
+`
+
+const StyledTitle = styled.h2`
+  padding-bottom: 0.25em;
+  margin-bottom: 0;
+`
 
 export const LikeArtistHeader: React.SFC<{artist_id: string}> = ({artist_id}) => {
   const { state } = useGetArtist(artist_id)
+  console.log(state)
   return <AsyncSwitcher<GetArtistResponse> {...state}>
-    {result => <h2>Artists like {result.body.name}</h2>}
+    {({body: { name, genres }}) =>
+      <StyledHeader>
+        <StyledTitle>Artists like {name}</StyledTitle>
+        <GenreLabels {...{genres, limit:99}}/>
+      </StyledHeader>
+    }
   </AsyncSwitcher>
 }
 
