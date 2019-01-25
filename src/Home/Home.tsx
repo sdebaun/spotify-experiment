@@ -7,7 +7,7 @@ import { LikeArtist } from './LikeArtist'
 import { useAuthResponse } from '../useAuthToken'
 
 const SignInCTA: React.SFC = () =>
-  <div>Sign in to see your top artists.</div>
+  <div>Sign in to see your top artists!</div>
 
 const HomeRoutes: React.SFC = () =>
   <>
