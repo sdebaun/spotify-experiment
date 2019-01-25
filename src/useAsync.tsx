@@ -5,7 +5,7 @@ a) none of them have typescript bindings
 b) i would rather practice hooks and write this myself than write bindings for someone else's thing
 */
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export type AsyncState<T> = {
   result: T | undefined,
@@ -31,4 +31,15 @@ export function useAsync<T>(fn: Function, ...args: any) {
   useEffect(() => { effect(args) }, args)
 
   return {state, setState}
+}
+
+type RenderComponent<T> =  {
+  children: (r: T) => JSX.Element[] | JSX.Element
+}
+
+export function AsyncSwitcher<T = any>({isComplete, isErrored, result, children}: AsyncState<T> & RenderComponent<T>) {
+  if (!isComplete) return <div>Loading</div>
+  if (isErrored) return <div>Error</div>
+  if (!result) return <div>No Result</div>
+  return <>{children(result)}</>
 }

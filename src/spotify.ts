@@ -52,3 +52,49 @@ export const useSpotify = () => {
 
   return spotifyApi
 }
+
+export type SpotifyImage = {
+  height: number,
+  url: string,
+}
+
+export type SpotifyArtist = {
+  external_urls: any
+  genres: string[]
+  href: string
+  id: string
+  name: string
+  popularity: number
+  images: SpotifyImage[]
+}
+
+export type GetMyTopArtistsResponse = {
+  body: {
+    items: SpotifyArtist[]
+  }
+}
+
+export const useGetMyTopArtists = () => {
+  const api = useSpotify()
+  return useAsync<GetMyTopArtistsResponse>(api.getMyTopArtists.bind(api))
+}
+
+export type GetArtistRelatedArtistsResponse = {
+  body: {
+    artists: SpotifyArtist[]
+  }
+}
+
+export const useGetArtistRelatedArtists = (artist_id: string) => {
+  const api = useSpotify()
+  return useAsync<GetArtistRelatedArtistsResponse>(api.getArtistRelatedArtists.bind(api), artist_id)
+}
+
+export type GetArtistResponse = {
+  body: SpotifyArtist
+}
+
+export const useGetArtist = (artist_id: string) => {
+  const api = useSpotify()
+  return useAsync<GetArtistResponse>(api.getArtist.bind(api), artist_id)
+}
