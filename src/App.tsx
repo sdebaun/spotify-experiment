@@ -1,14 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import { Home } from './Home'
+import { Header } from './Header'
 import { AuthCallback } from './AuthCallback'
+import { Home } from './Home'
 
 const App: React.SFC<{}> = () =>
   <Router>
     <div>
-      <Route path='/' exact component={Home}/>
-      <Route path='/auth' component={AuthCallback}/>
+      <Header/>
+      <Switch>
+        <Route path='/auth' component={AuthCallback}/>
+        <Route path='/' component={Home}/>
+      </Switch>
     </div>
   </Router>
 

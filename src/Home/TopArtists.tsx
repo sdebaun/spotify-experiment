@@ -3,13 +3,14 @@ import React from 'react';
 import { useAsync } from '../useAsync'
 import { authRedirect, useSpotify } from '../spotify'
 import { useAuthResponse } from '../useAuthToken'
+import { Link } from 'react-router-dom'
 
 type SpotifyImage = {
   height: number,
   url: string,
 }
 
-type SpotifyArtist = {
+export type SpotifyArtist = {
   external_urls: any
   genres: string[]
   href: string
@@ -19,29 +20,32 @@ type SpotifyArtist = {
   images: SpotifyImage[]
 }
 
-type GetMyTopArtistsResponse = {
+export type GetMyTopArtistsResponse = {
   body: {
     items: SpotifyArtist[]
   }
 }
 
-type GetArtistRelatedArtistsResponse = {
+export type GetArtistRelatedArtistsResponse = {
   body: {
     artists: SpotifyArtist[]
   }
 }
 
-const Artist: React.SFC<{artist: SpotifyArtist}> = ({artist: {name, id, popularity, genres}}) =>
-  <div>
-    <h4>{name}</h4>
-    <div>{id}</div>
-    <div>{genres.map((g,key) => <div {...{key}}>{g}</div>)}</div>
-  </div>
+// export const Artist: React.SFC<{artist: SpotifyArtist}> = ({artist: {name, id, popularity, genres}}) =>
+//   <div>
+//     <Link to={`/like/${id}`}>
+//       <h4>{name}</h4>
+//     </Link>
+//     <div>{id}</div>
+//     <div>{genres.map((g,key) => <div {...{key}}>{g}</div>)}</div>
+//   </div>
+
+import { Artist } from './Artist'
 
 export const TopArtists: React.SFC = () => {
   const api = useSpotify()
-  // const { state, setState } = useAsync<GetMyTopArtistsResponse>(api.getMyTopArtists.bind(api))
-  const { state, setState } = useAsync<GetArtistRelatedArtistsResponse>(api.getArtistRelatedArtists.bind(api), '3QgSmABpItIdj908ek80n5')
+  const { state, setState } = useAsync<GetMyTopArtistsResponse>(api.getMyTopArtists.bind(api))
   console.log('state', state)
 
   if (!state.isComplete) return <div>Loading...</div>
@@ -50,7 +54,6 @@ export const TopArtists: React.SFC = () => {
     <h2>
     Top Artists
     </h2>
-    {/* { state.result && state.result.body.items.map((artist: SpotifyArtist) => <Artist {...{key: artist.id, artist}}/>)} */}
-    { state.result && state.result.body.artists.map((artist: SpotifyArtist) => <Artist {...{key: artist.id, artist}}/>)}
+    { state.result && state.result.body.items.map((artist: SpotifyArtist) => <Artist {...{key: artist.id, artist}}/>)}
   </div>
 }

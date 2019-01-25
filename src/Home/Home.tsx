@@ -1,32 +1,21 @@
 import React from 'react';
-
-import { authRedirect } from '../spotify'
-import { useAuthResponse } from '../useAuthToken'
+import { Route } from 'react-router-dom'
 
 import { TopArtists } from './TopArtists'
+import { LikeArtist } from './LikeArtist'
 
-const SignOut: React.SFC = () => {
-  const { clearAuthResponse: clearAuthToken } = useAuthResponse()
-  return <button onClick={clearAuthToken}>sign out</button>
-}
-
-const SignIn: React.SFC = () =>
-  <button onClick={authRedirect}>sign in with spotify</button>
-
-const AuthOptions: React.SFC = () => {
-  const { authResponse: authToken } = useAuthResponse()
-  return authToken ? <SignOut/> : <SignIn/>
-}
+import { useAuthResponse } from '../useAuthToken'
 
 const SignInCTA: React.SFC = () =>
   <div>Sign in to see your top artists.</div>
 
-export const Home: React.SFC = () => {
-  const { authResponse: authToken } = useAuthResponse()
+const HomeRoutes: React.SFC = () =>
+  <>
+  <Route path='/' exact component={TopArtists}/>
+  <Route path='/like/:artist_id' component={LikeArtist}/>
+  </>
 
-  return <div>
-    <div>Home</div>
-    <AuthOptions/>
-    { authToken ? <TopArtists/> : <SignInCTA/> }
-  </div>
+export const Home: React.SFC = () => {
+  const { authResponse } = useAuthResponse()
+  return authResponse ? <HomeRoutes/> : <SignInCTA/>
 }

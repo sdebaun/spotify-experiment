@@ -7,7 +7,7 @@ import { useAuthResponse } from './useAuthToken';
 const redirectUri = 'http://localhost:3000/auth'
 const clientId = '26622a388ed842deaafe5f8cf71a4352'
 const scopes = ['user-read-private', 'user-read-email', 'user-top-read']
-const state = 'what-is-state-for'
+const state = 'none'
 
 // ok, so there is a PR open for the spotify api that adds Implicit grant flow
 // https://github.com/thelinmichael/spotify-web-api-node/pull/261/commits/7433993be55e58d67ad37a1236f3a05ad6734db2
@@ -35,7 +35,6 @@ const createImplicitGrantURL = (scopes: string[], state: string) =>
 export const authRedirect = () => {
   // const authURL = spotifyApi.createAuthorizeURL(scopes, state)
   const authURL = createImplicitGrantURL(scopes, state)
-  // console.log(authURL)
   window.location.href = authURL
 }
 
