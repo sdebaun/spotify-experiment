@@ -28,3 +28,6 @@
 
 ## Technical Debt Blocked
 [] hacky homegrown method for getting Implicit Grant from spotify.  A PR exists to add that feature to the official api.  homegrown method undoubtedly has edge case issues, not really tested.  when that PR is merged, update code to use api.
+
+## Known Bugs
+[] app doesn't refresh unless i go into chrome devtools / Application / Service Workers and manually 'Unregister' each service worker listed.  wtf
