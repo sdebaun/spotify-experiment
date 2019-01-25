@@ -1,6 +1,6 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { SpotifyArtist, useGetMyTopArtists, GetMyTopArtistsResponse } from '../spotify'
+import { useGetMyTopArtists, GetMyTopArtistsResponse } from '../spotify'
 
 import { Artist } from './Artist'
 import { AsyncSwitcher } from '../useAsync';

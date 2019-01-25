@@ -1,33 +1,7 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom'
-
-type SpotifyImage = {
-  height: number,
-  url: string,
-}
-
-export type SpotifyArtist = {
-  external_urls: any
-  genres: string[]
-  href: string
-  id: string
-  name: string
-  popularity: number
-  images: SpotifyImage[]
-}
-
-export type GetMyTopArtistsResponse = {
-  body: {
-    items: SpotifyArtist[]
-  }
-}
-
-export type GetArtistRelatedArtistsResponse = {
-  body: {
-    artists: SpotifyArtist[]
-  }
-}
+import { SpotifyArtist } from '../spotify'
 
 export const Artist: React.SFC<{artist: SpotifyArtist}> = ({artist: {name, id, popularity, genres}}) =>
   <div>

@@ -12,7 +12,7 @@ import {
 import { Artist } from './Artist'
 
 export const LikeArtistHeader: React.SFC<{artist_id: string}> = ({artist_id}) => {
-  const { state, setState } = useGetArtist(artist_id)
+  const { state } = useGetArtist(artist_id)
   return <AsyncSwitcher<GetArtistResponse> {...state}>
     {result => <h2>Artists like {result.body.name}</h2>}
   </AsyncSwitcher>

@@ -1,10 +1,11 @@
-import { useState } from 'react'
 //@ts-ignore
 import SpotifyWebApi from 'spotify-web-api-node' 
 import { useAsync } from './useAsync';
 import querystring from 'query-string'
 import { useAuthResponse } from './useAuthToken';
-const redirectUri = 'http://localhost:3000/auth'
+
+const redirectUri = `${window.location.protocol}//${window.location.host}/auth`
+console.log(redirectUri)
 const clientId = '26622a388ed842deaafe5f8cf71a4352'
 const scopes = ['user-read-private', 'user-read-email', 'user-top-read']
 const state = 'none'
